@@ -25,7 +25,7 @@ stan_speeches_param_est <- function(stanfit, model_pars = c('beta', 'alpha'),
 
         temp <- est_1(sims = sims) %>% as.data.frame
 
-        combined <- cbind.fill(combined, temp)
+        combined <- StanSpeeches:::cbind.fill(combined, temp)
 
         combined <- sapply(1:ncol(combined), function(x)
                     c(combined[, x], '', obs))
@@ -43,7 +43,8 @@ stan_speeches_param_est <- function(stanfit, model_pars = c('beta', 'alpha'),
 
     combined <- combined %>% as.data.frame
 
-    if (missing(col_labels)) col_labels <- c('', names(stanfit)[i])
+    if (missing(col_labels)) col_labels <- c('', 
+                                             names(stanfit)[1:length(stanfit)])
     names(combined) <- col_labels
 
     return(combined)
