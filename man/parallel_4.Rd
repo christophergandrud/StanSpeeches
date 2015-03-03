@@ -2,12 +2,23 @@
 % Please edit documentation in R/parallel_4.R
 \name{parallel_4}
 \alias{parallel_4}
-\title{A simple function for running Stan in parallel}
+\title{A simple wrapper function for running Stan in parallel on Mac or Linux}
 \usage{
 parallel_4(fit, data, iter = 2000, pars = c("alpha", "beta", "a",
   "log_lik"), cores = 4)
 }
+\arguments{
+\item{fit}{a \code{stanfit} object, can be without simulations.}
+
+\item{data}{a list with the data for Stan.}
+
+\item{iter}{integer number of iterations to run per chain.}
+
+\item{pars}{character vector of parameters to keep.}
+
+\item{cores}{integer number of cores to run on.}
+}
 \description{
-A simple function for running Stan in parallel
+A simple wrapper function for running Stan in parallel on Mac or Linux
 }
 

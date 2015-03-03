@@ -55,7 +55,7 @@ predict_1 <- function(stanfit, data, fitted_values, a_num,
     raw <- sapply(1:nrow(betas_x),
                   function(x) sum(betas_x[x, ]) + alpha[x] + a[x])
 
-    pred_prob <- boot::inv.logit(raw)
+    pred_prob <- inv.logit(raw)
 
     spin_95 <- SPIn(pred_prob, conf = 0.95)
     spin_50 <- SPIn(pred_prob, conf = 0.5)

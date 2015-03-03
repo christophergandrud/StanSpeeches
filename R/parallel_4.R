@@ -1,6 +1,13 @@
-#' A simple function for running Stan in parallel
+#' A simple wrapper function for running Stan in parallel on Mac or Linux
+#' @param fit a \code{stanfit} object, can be without simulations.
+#' @param data a list with the data for Stan.
+#' @param iter integer number of iterations to run per chain.
+#' @param pars character vector of parameters to keep.
+#' @param cores integer number of cores to run on.
+#'
 #' @importFrom rstan stan sflist2stanfit
 #' @importFrom parallel mclapply
+#' @export
 
 parallel_4 <- function(fit, data, iter = 2000,
                         pars = c('alpha', 'beta', 'a', 'log_lik'), cores = 4)
