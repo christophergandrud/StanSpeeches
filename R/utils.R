@@ -1,3 +1,18 @@
+#' Create data lists for Stan from a base list and model covariates
+#'
+#' @param base a list with the shared elements.
+#' @param df a data frame where the \code{vars} can be found.
+#' @param vars a character vector of variable names to include in the model.
+#'
+#' @export
+
+stan_lister <- function(base, df, vars)
+{
+    base$K <- length(covars_all)
+    base$X <- df[, covars_all] %>% as.matrix
+    return(base)
+}
+
 #' Helper function for waic
 #' @noRd
 

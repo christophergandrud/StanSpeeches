@@ -2,6 +2,7 @@
 
 export(parallel_4)
 export(predict_speeches_prob)
+export(stan_lister)
 export(stan_speeches_param_est)
 export(waic)
 importFrom(SPIn,SPIn)
