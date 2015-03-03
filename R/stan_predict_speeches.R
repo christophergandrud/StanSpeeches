@@ -12,16 +12,15 @@
 #'
 #' @export
 
-predict_prob <- function(stanfit, data, fitted_values, a_num, betas,
+predict_prob <- function(stanfit, data, fitted_values, a_num,
                               model_pars = c('beta', 'alpha', 'a'))
 {
     pred_prob_out <- data.frame()
     for (i in 1:nrow(fitted_values)) {
         temp <- fitted_values[i, ]
-        temp_predict <- predict_1(stanfit = fit_housing,
-                                  data = speeches_data_housing,
-                                  fitted_values = temp, a_num = 3,
-                                  betas = betas)
+        temp_predict <- predict_1(stanfit = stanfit,
+                                  data = data,
+                                  fitted_values = temp, a_num = a_num)
 
         pred_prob_out <- rbind(pred_prob_out, temp_predict)
     }

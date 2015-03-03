@@ -50,6 +50,7 @@ stan_speeches_param_est <- function(stanfit, model_pars = c('beta', 'alpha'),
 }
 
 #' Internal function for finding individual model runs
+#' @noRd
 
 est_1 <- function(sims) {
     medians <- sapply(1:ncol(sims), function(x) median(sims[, x]) %>%

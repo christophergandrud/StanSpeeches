@@ -9,5 +9,10 @@ Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 Description: This package includes functions to make running and showing results
     from Stan models in the Fed Speeches Project by Christopher Gandrud and
     Kevin Young
-License: MIT License
+License: GPL-3
+Imports:
+    boot,
+    dplyr,
+    rstan,
+    SPIn
 LazyData: TRUE

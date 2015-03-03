@@ -4,8 +4,8 @@
 \alias{predict_prob}
 \title{Predict probabilities for multiple scenarios}
 \usage{
-predict_prob(stanfit, data, fitted_values, a_num, betas,
-  model_pars = c("beta", "alpha", "a"))
+predict_prob(stanfit, data, fitted_values, a_num, model_pars = c("beta",
+  "alpha", "a"))
 }
 \arguments{
 \item{stanfit}{a \code{stanfit} object.}
