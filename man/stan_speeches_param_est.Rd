@@ -14,9 +14,10 @@ unless \code{col_labels} is specified.}
 \item{model_pars}{character vector of parameters from the \code{stanfit}
 object to include in the table.}
 
-\item{pars_labels}{optional vector of parameter labels to include in the
-table. Must be as long as the parameter list from the longest \code{stanfit}
-object and in the same order.}
+\item{pars_labels}{required vector of parameter labels to include in the
+table. Must be a list with parameter labels for each element in
+\code{stanfit} and in the same order. Identical variables must have matching
+labels.}
 
 \item{col_labels}{optional vector of column labels.}
 
