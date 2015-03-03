@@ -12,38 +12,39 @@
 #' implementation.
 #'
 #' @importFrom rstan extract
-#' @importFrom dplyr %>%
+#' @importFrom dplyr %>% full_join
 #' @export
 
 stan_speeches_param_est <- function(stanfit, model_pars = c('beta', 'alpha'),
                                     pars_labels, col_labels, obs)
 {
-    combined <- data.frame()
     for (i in 1:length(stanfit)) {
         sims <- rstan::extract(stanfit[[i]], pars = model_pars) %>%
                     as.data.frame
 
-        temp <- est_1(sims = sims) %>% as.data.frame
-
-        combined <- StanSpeeches:::cbind.fill(combined, temp)
-
-        combined <- sapply(1:ncol(combined), function(x)
-                    c(combined[, x], '', obs))
-
-        combined <- sapply(1:ncol(combined), function(x)
-                        c(combined[, x],
-                          as.vector(round(waic(stanfit[[i]])$waic[1],
-                          digits = 2))))
+        unnamed <- est_1(sims = sims) %>% as.data.frame(stringsAsFactors = F)
+        unnamed <- rbind(unnamed, obs)
+        
+        unnamed <- sapply(1:ncol(unnamed), function(x)
+            c(unnamed[, x],
+              as.vector(round(waic(stanfit[[i]])$waic[1],
+                              digits = 2))))
+        pars_labels_temp <- pars_labels[[i]]
+        names <- rbind(pars_labels_temp, sprintf('%s_ci', pars_labels_temp)) %>% c
+        labels <- c(names, 'Obs.', 'WAIC')
+        unnamed <- cbind(labels, unnamed)
+        
+        if (i == 1) {
+            combined <- unnamed %>% data.frame
+        }
+        else if (i > 1) {
+            temp <- unnamed %>% data.frame
+            combined <- full_join(combined, temp, by = 'labels', copy = T)
+        }
     }
-
-    if (missing(pars_labels)) pars_labels <- names(sims)
-    names <- rbind(pars_labels, rep('', length(pars_labels))) %>% c
-    labels <- c(names, '', 'Obs.', 'WAIC')
-    combined <- cbind(labels, combined)
-
     combined <- combined %>% as.data.frame
 
-    if (missing(col_labels)) col_labels <- c('', 
+    if (missing(col_labels)) col_labels <- c('Parameters', 
                                              names(stanfit)[1:length(stanfit)])
     names(combined) <- col_labels
 
