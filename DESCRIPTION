@@ -1,0 +1,13 @@
+Package: StanSpeeches
+Type: Package
+Title: Functions for Running Models/Showing Output from Stan for the Fed
+    Speeches Project
+Version: 0.1
+Date: 2015-03-03
+Author: Christopher Gandrud
+Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
+Description: This package includes functions to make running and showing results
+    from Stan models in the Fed Speeches Project by Christopher Gandrud and
+    Kevin Young
+License: MIT License
+LazyData: TRUE
