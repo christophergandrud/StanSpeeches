@@ -8,8 +8,8 @@
 
 stan_lister <- function(base, df, vars)
 {
-    base$K <- length(covars_all)
-    base$X <- df[, covars_all] %>% as.matrix
+    base$K <- length(vars)
+    base$X <- df[, vars] %>% as.matrix
     return(base)
 }
 
