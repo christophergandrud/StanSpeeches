@@ -12,7 +12,7 @@
 #'
 #' @export
 
-predict_prob <- function(stanfit, data, fitted_values, a_num,
+predict_speeches_prob <- function(stanfit, data, fitted_values, a_num,
                               model_pars = c('beta', 'alpha', 'a'))
 {
     pred_prob_out <- data.frame()
