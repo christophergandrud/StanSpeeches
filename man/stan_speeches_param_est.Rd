@@ -19,7 +19,8 @@ table. Must be a list with parameter labels for each element in
 \code{stanfit} and in the same order. Identical variables must have matching
 labels.}
 
-\item{col_labels}{optional vector of column labels.}
+\item{col_labels}{optional vector of column labels. If not specified then
+names of fitted stan models in \code{stanfit} are used.}
 
 \item{obs}{intiger number of observations in the model. Note: currently crude
 implementation.}

@@ -8,7 +8,8 @@
 #' table. Must be a list with parameter labels for each element in
 #' \code{stanfit} and in the same order. Identical variables must have matching
 #' labels.
-#' @param col_labels optional vector of column labels.
+#' @param col_labels optional vector of column labels. If not specified then
+#' names of fitted stan models in \code{stanfit} are used.
 #' @param obs intiger number of observations in the model. Note: currently crude
 #' implementation.
 #'
@@ -31,16 +32,20 @@ stan_speeches_param_est <- function(stanfit, model_pars = c('beta', 'alpha'),
               as.vector(round(waic(stanfit[[i]])$waic[1],
                               digits = 2))))
         pars_labels_temp <- pars_labels[[i]]
-        names <- rbind(pars_labels_temp, sprintf('%s_ci', pars_labels_temp)) %>% c
+        names <- rbind(pars_labels_temp, sprintf('%s_ci', pars_labels_temp)) %>%
+                        c
         labels <- c(names, 'Obs.', 'WAIC')
         unnamed <- cbind(labels, unnamed)
 
         if (i == 1) {
             combined <- unnamed %>% data.frame
+            names(combined) <- c('labels', 'm1')
         }
         else if (i > 1) {
             temp <- unnamed %>% data.frame
-            combined <- full_join(combined, temp, by = 'labels', copy = T)
+            names(temp) <- c('labels', sprintf('m%s', i))
+            combined <- suppressWarnings(
+                            full_join(combined, temp, by = 'labels', copy = T))
         }
     }
     combined <- combined %>% as.data.frame
