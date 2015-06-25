@@ -12,7 +12,7 @@ stan_lister <- function(base, df, vars)
 {
     base$K <- length(vars)
     message('Converting all variables to numeric. Please check.')
-    base$X <- df[, vars] %>% as.matrix %>% as.numeric
+    base$X <- df[, vars] %>% data.matrix
     return(base)
 }
 
