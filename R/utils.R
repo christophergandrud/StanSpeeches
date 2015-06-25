@@ -4,12 +4,15 @@
 #' @param df a data frame where the \code{vars} can be found.
 #' @param vars a character vector of variable names to include in the model.
 #'
+#' @importFrom dplyr %>%
+#'
 #' @export
 
 stan_lister <- function(base, df, vars)
 {
     base$K <- length(vars)
-    base$X <- df[, vars] %>% as.matrix
+    message('Converting all variables to numeric. Please check.')
+    base$X <- df[, vars] %>% as.matrix %>% as.numeric
     return(base)
 }
 
